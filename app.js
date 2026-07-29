@@ -8,4 +8,4 @@ function boot() {
   document.getElementById('status').textContent = 'Demo app loaded.';
 }
 document.addEventListener('DOMContentLoaded', boot);
-//# sourceMappingURL=/app.js.map
+//# sourceMappingURL=app.js.map
