@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Broken Demo App — a deliberately insecure app for testing Preflight</title>
+<meta name="description" content="A deliberately insecure demo app. Every credential in it is fake. It exists so you can try Preflight without owning an app.">
+<meta name="robots" content="noindex">
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    max-width: 46rem; margin: 0 auto; padding: 3rem 1.25rem; }
+  h1 { font-size: 1.6rem; line-height: 1.2; margin: 0 0 .75rem; }
+  p { margin: 0 0 1rem; }
+  code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .9em; }
+  .warn { border-left: 3px solid #b3261e; padding: .75rem 1rem; background: rgba(179,38,30,.07); }
+  ul { padding-left: 1.15rem; }
+  a { color: inherit; }
+</style>
+</head>
+<body>
+  <h1>Broken Demo App</h1>
+  <p id="status">Loading…</p>
+
+  <div class="warn">
+    <p><strong>This app is insecure on purpose.</strong> It exists so you can try
+    <a href="https://preflight.preflight-app.workers.dev/">Preflight</a> without needing an app of
+    your own.</p>
+    <p style="margin:0"><strong>Every credential in it is fake and non-functional.</strong> The keys
+    are well-formed so a scanner can parse them, but they are signed with a dummy value and point at
+    a project that does not exist. There is no database behind this page and no data to leak.</p>
+  </div>
+
+  <h2>What a scan of this page should find</h2>
+  <ul>
+    <li>A Supabase <code>service_role</code> key in the JavaScript — the severe one</li>
+    <li>An AI provider key in the JavaScript</li>
+    <li>A Supabase anon key, which is meant to be public but signals the RLS question</li>
+    <li>Permissive CORS that allows credentials from any origin</li>
+    <li>A published source map reference</li>
+    <li>No Content Security Policy, no HSTS, no frame protection</li>
+  </ul>
+
+  <p>Scan it: <a href="https://preflight.preflight-app.workers.dev/">preflight.preflight-app.workers.dev</a></p>
+
+  <script src="/app.js"></script>
+</body>
+</html>
